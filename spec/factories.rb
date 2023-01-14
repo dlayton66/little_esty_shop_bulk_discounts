@@ -12,8 +12,8 @@ FactoryBot.define do
 
   factory :merchant do
     name {Faker::Space.galaxy}
-    invoices
-    items
+    # invoices
+    # items
   end
 
   factory :item do
@@ -33,5 +33,11 @@ FactoryBot.define do
     status {[0,1,2].sample}
     merchant
     invoice
+  end
+
+  factory :bulk_discount do
+    discount {[*0..100].sample}
+    sequence(:name, 0) { |n| "Discount#{n}" }
+    merchant
   end
 end

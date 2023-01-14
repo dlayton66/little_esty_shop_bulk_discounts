@@ -1,0 +1,13 @@
+<body>
+  <div class="row">
+    <p class='mr-auto col-sm-5'>Bulk Discounts</p>
+  </div>
+
+  <ul class='mr-auto col-sm-4'>
+    <% @bulk_discounts.each do |bulk_discount| %>
+      <section id="bulk_discount-<%= bulk_discount.id %>">
+        <li><%= bulk_discount.name %></li>
+      </section>
+    <% end %>
+  </ul>
+</body>
