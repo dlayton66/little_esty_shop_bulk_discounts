@@ -20,8 +20,8 @@ RSpec.describe Customer, type: :model do
       @item_1 = Item.create!(name: "Shampoo", description: "This washes your hair", unit_price: 10, merchant_id: @merchant_1.id, status: 1)
       @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 9, unit_price: 10, status: 0, created_at: "2012-03-27 14:54:09")
       @ii_2 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_1.id, quantity: 1, unit_price: 10, status: 0, created_at: "2012-03-29 14:54:09")
-      @transaction1 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_1.id)
-      @transaction2 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_2.id)
+      @transaction_1 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_1.id)
+      @transaction_2 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_2.id)
     end
 
     it 'number_of_transactions' do
@@ -57,12 +57,12 @@ RSpec.describe Customer, type: :model do
       @ii_7 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 9, unit_price: 10, status: 0, created_at: "2012-03-27 14:54:09")
       @ii_8 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_1.id, quantity: 1, unit_price: 10, status: 0, created_at: "2012-03-29 14:54:09")
 
-      @transaction1 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_1.id)
-      @transaction2 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_1a.id)
-      @transaction2 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_2.id)
-      @transaction2 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_3.id)
-      @transaction2 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_4.id)
-      @transaction2 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_5.id)
+      @transaction_1 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_1.id)
+      @transaction_2 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_1a.id)
+      @transaction_2 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_2.id)
+      @transaction_2 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_3.id)
+      @transaction_2 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_4.id)
+      @transaction_2 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_5.id)
     end
 
     it 'top_customers' do
