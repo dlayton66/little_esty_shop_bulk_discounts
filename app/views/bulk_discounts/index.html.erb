@@ -14,6 +14,7 @@
           <ul>
             <li><%= bulk_discount.discount %>% off</li>
             <li><%= bulk_discount.quantity %> or more items</li>
+            <li "list-style: none;"><%= button_to 'Delete Bulk Discount', merchant_bulk_discount_path(@merchant, bulk_discount), method: :delete %>
           </ul>
         </li>
       </section>
