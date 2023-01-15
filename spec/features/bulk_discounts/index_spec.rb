@@ -39,4 +39,32 @@ RSpec.describe 'bulk discounts index' do
   it 'has a link to create a new discount' do
     expect(page).to have_link('Create Bulk Discount', href: new_merchant_bulk_discount_path(@merchant_1))
   end
+
+  it 'has button which deletes each discount' do
+    within("#bulk_discount-#{@bulk_discounts[0].id}") do
+      expect(page).to have_button('Delete Bulk Discount')
+      click_button('Delete Bulk Discount')
+    end
+
+    expect(current_path).to eq(merchant_bulk_discounts_path(@merchant_1))
+    expect(page).to_not have_content(@bulk_discounts[0].name)
+    expect(page).to_not have_content(@bulk_discounts[0].discount)
+    expect(page).to_not have_content(@bulk_discounts[0].quantity)
+
+    within("#bulk_discount-#{@bulk_discounts[1].id}") do
+      expect(page).to have_button('Delete Bulk Discount')
+      click_button('Delete Bulk Discount')
+    end
+
+    expect(current_path).to eq(merchant_bulk_discounts_path(@merchant_1))
+    expect(page).to_not have_content(@bulk_discounts[1].name)
+    expect(page).to_not have_content(@bulk_discounts[1].discount)
+    expect(page).to_not have_content(@bulk_discounts[1].quantity)
+
+    it 'leaves other discount info unaffected' do
+      expect(page).to have_content(@bulk_discounts[2].name)
+      expect(page).to have_content(@bulk_discounts[2].discount)
+      expect(page).to have_content(@bulk_discounts[2].quantity)
+    end
+  end
 end
