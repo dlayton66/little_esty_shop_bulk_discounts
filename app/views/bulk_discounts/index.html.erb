@@ -6,7 +6,12 @@
   <ul class='mr-auto col-sm-4'>
     <% @bulk_discounts.each do |bulk_discount| %>
       <section id="bulk_discount-<%= bulk_discount.id %>">
-        <li><%= bulk_discount.name %></li>
+        <li><%= link_to bulk_discount.name, merchant_bulk_discount_path(bulk_discount.merchant, bulk_discount) %>
+          <ul>
+            <li><%= bulk_discount.discount %>% off</li>
+            <li><%= bulk_discount.quantity %> or more items</li>
+          </ul>
+        </li>
       </section>
     <% end %>
   </ul>
