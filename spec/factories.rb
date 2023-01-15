@@ -37,6 +37,7 @@ FactoryBot.define do
 
   factory :bulk_discount do
     discount {[*0..100].sample}
+    quantity {[*5..30].sample}
     sequence(:name, 0) { |n| "Discount#{n}" }
     merchant
   end

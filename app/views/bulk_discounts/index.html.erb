@@ -5,6 +5,8 @@
     <p class='mr-auto col-sm-5'>Bulk Discounts</p>
   </div>
 
+  <h3><%= link_to 'Create Bulk Discount', new_merchant_bulk_discount_path(@merchant) %></h3>
+
   <ul class='mr-auto col-sm-4'>
     <% @bulk_discounts.each do |bulk_discount| %>
       <section id="bulk_discount-<%= bulk_discount.id %>">

@@ -24,5 +24,19 @@ RSpec.describe 'bulk discounts index' do
       expect(page).to have_content(@bulk_discounts[0].discount)
       expect(page).to have_content(@bulk_discounts[0].quantity)
     end
+
+    within("#bulk_discount-#{@bulk_discounts[1].id}") do
+      expect(page).to have_content(@bulk_discounts[1].discount)
+      expect(page).to have_content(@bulk_discounts[1].quantity)
+    end
+    
+    within("#bulk_discount-#{@bulk_discounts[2].id}") do
+      expect(page).to have_content(@bulk_discounts[2].discount)
+      expect(page).to have_content(@bulk_discounts[2].quantity)
+    end
+  end
+
+  it 'has a link to create a new discount' do
+    expect(page).to have_link('Create Bulk Discount', href: new_merchant_bulk_discount_path(@merchant_1))
   end
 end
