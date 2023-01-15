@@ -1,7 +1,8 @@
 <%= render partial: "partials/merchant_header" %>
-<div class="row">
-  <p class='mr-auto col-sm-5'>Create Bulk Discount</p>
-</div>
+<%= render partial: "partials/title_header", locals: {
+    title: "Create Bulk Discount"
+    }
+%>
 
 <%= form_with model: [@merchant, @bulk_discount], local: true do |f| %>
   <%= f.label :name %>
