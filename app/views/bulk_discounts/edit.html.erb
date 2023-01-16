@@ -1,0 +1,18 @@
+<%= render partial: "partials/merchant_header" %>
+<%= render partial: "partials/title_header", locals: {
+    title: "Bulk Discount Edit Page"
+    }
+%>
+
+<%= form_with model: [@merchant, @bulk_discount], local: true do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :discount %>
+  <%= f.text_field :discount %>
+
+  <%= f.label :quantity %>
+  <%= f.text_field :quantity %>
+
+  <%= f.submit 'Update' %>
+<% end %>
