@@ -4,6 +4,6 @@
     }
 %>
 
-<h3><%= @bulk_discount.name %></h3>
+<h3><%= @bulk_discount.name %></h3><%= link_to 'Edit', edit_merchant_bulk_discount_path(@merchant, @bulk_discount)%>
 <p>Discount: <%= @bulk_discount.discount %>% off</p>
 <p>Quantity: <%= @bulk_discount.quantity %> or more items</p>
