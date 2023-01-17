@@ -32,6 +32,10 @@ gem 'uglifier', '>= 1.3.0'
 
 # Reduces boot times through caching; required in config/boot.rb
 
+group :production, :development, :test do
+  gem 'httparty'
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'capybara'
@@ -44,7 +48,6 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'simplecov'
   gem 'table_print'
-  gem 'httparty'
 end
 
 group :development do
