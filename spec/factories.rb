@@ -6,14 +6,11 @@ FactoryBot.define do
 
   factory :invoice do
     status {[0,1,2].sample}
-    merchant
     customer
   end
 
   factory :merchant do
     name {Faker::Space.galaxy}
-    # invoices
-    # items
   end
 
   factory :item do
@@ -31,8 +28,13 @@ FactoryBot.define do
 
   factory :invoice_item do
     status {[0,1,2].sample}
-    merchant
+    item
     invoice
+    
+    factory :invoice_item_single_purchase do
+      item { create(:item, merchant: Merchant.first) }
+      invoice { Invoice.first }
+    end
   end
 
   factory :bulk_discount do
@@ -40,5 +42,9 @@ FactoryBot.define do
     quantity {[*5..30].sample}
     sequence(:name, 0) { |n| "Discount#{n}" }
     merchant
+
+    factory :bulk_discount_single_merchant do
+      merchant { Merchant.first }
+    end
   end
 end

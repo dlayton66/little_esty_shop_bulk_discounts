@@ -30,29 +30,19 @@ RSpec.describe Invoice, type: :model do
 
     describe '#total_discounted_revenue' do
       before :each do
-        @m1 = Merchant.create!(name: 'Merchant 1')
-  
-        @customer_1 = Customer.create!(first_name: 'Joey', last_name: 'Smith')
-  
-        @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: 2, created_at: "2012-03-27 14:54:09")
-  
-        @item_1 = Item.create!(name: 'Shampoo', description: 'This washes your hair', unit_price: 10, merchant_id: @m1.id)
-        @item_2 = Item.create!(name: 'Conditioner', description: 'This makes your hair shiny', unit_price: 8, merchant_id: @m1.id)
-        @item_3 = Item.create!(name: 'Brush', description: 'This takes out tangles', unit_price: 5, merchant_id: @m1.id)  
-        @item_4 = Item.create!(name: "Hair tie", description: "This holds up your hair", unit_price: 1, merchant_id: @m1.id)
-        @item_5 = Item.create!(name: "Bracelet", description: "Wrist bling", unit_price: 200, merchant_id: @m1.id)
-        @item_6 = Item.create!(name: "Necklace", description: "Neck bling", unit_price: 300, merchant_id: @m1.id)
-  
-        @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 5, unit_price: 10, status: 0)
-        @ii_2 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_2.id, quantity: 10, unit_price: 8, status: 0)
-        @ii_3 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_3.id, quantity: 15, unit_price: 5, status: 2)
-        @ii_4 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_4.id, quantity: 20, unit_price: 5, status: 1)
-        @ii_5 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_5.id, quantity: 1, unit_price: 5, status: 1)
-  
-        @bulk_discount_1 = BulkDiscount.create!(name: "Christmas", discount: 30, quantity: 20, merchant_id: @m1.id)
-        @bulk_discount_2 = BulkDiscount.create!(name: "Easter", discount: 20, quantity: 19, merchant_id: @m1.id)
-        @bulk_discount_3 = BulkDiscount.create!(name: "MLK", discount: 15, quantity: 8, merchant_id: @m1.id)
-        @bulk_discount_4 = BulkDiscount.create!(name: "Boxing Day", discount: 5, quantity: 5, merchant_id: @m1.id)
+        FactoryBot.create(:merchant)
+        @invoice_1 = FactoryBot.create(:invoice)
+
+        FactoryBot.create(:invoice_item_single_purchase, quantity: 5, unit_price: 10)
+        FactoryBot.create(:invoice_item_single_purchase, quantity: 10, unit_price: 8)
+        FactoryBot.create(:invoice_item_single_purchase, quantity: 15, unit_price: 5)
+        FactoryBot.create(:invoice_item_single_purchase, quantity: 20, unit_price: 5)
+        FactoryBot.create(:invoice_item_single_purchase, quantity: 1, unit_price: 5)
+
+        FactoryBot.create(:bulk_discount_single_merchant, name: "Christmas", discount: 30, quantity: 20)
+        FactoryBot.create(:bulk_discount_single_merchant, name: "Easter", discount: 20, quantity: 19)
+        FactoryBot.create(:bulk_discount_single_merchant, name: "MLK", discount: 15, quantity: 8)
+        FactoryBot.create(:bulk_discount_single_merchant, name: "Boxing Day", discount: 5, quantity: 5)
       end
 
       it 'returns the revenue after bulk discounts have been applied' do
@@ -60,13 +50,13 @@ RSpec.describe Invoice, type: :model do
       end
 
       it 'adjusts the total discounted revenue when new discounts are added' do
-        BulkDiscount.create!(name: "Presidents Day", discount: 20, quantity: 10, merchant_id: @m1.id)
+        FactoryBot.create(:bulk_discount_single_merchant, name: "Presidents Day", discount: 20, quantity: 10)
 
         expect(@invoice_1.total_discounted_revenue).to eq(246.5)
       end
 
       it 'adjusts the total discounted revenue when new invoice items are added' do
-        InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_6.id, quantity: 20, unit_price: 20, status: 1)
+        FactoryBot.create(:invoice_item_single_purchase, quantity: 20, unit_price: 20)
 
         expect(@invoice_1.total_discounted_revenue).to eq(534.25)
       end
