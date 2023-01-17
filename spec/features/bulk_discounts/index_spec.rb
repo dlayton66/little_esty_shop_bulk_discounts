@@ -55,24 +55,36 @@ RSpec.describe 'bulk discounts index' do
     within("#upcoming_holidays-0") do
       expect(page).to have_button('Create Discount')
       click_button 'Create Discount'
-      expect(page).to have_current_path("/merchant/#{@merchant_1.id}/bulk_discounts/new?name=#{CGI.escape(upcoming_holidays[0])}")
     end
 
+    expect(page).to have_current_path("/merchant/#{@merchant_1.id}/bulk_discounts/new?name=#{CGI.escape(upcoming_holidays[0])}")
+    expect(page).to have_field(:bulk_discount_name, with: upcoming_holidays[0])
+    expect(page).to have_field(:bulk_discount_discount, with: 30)
+    expect(page).to have_field(:bulk_discount_quantity, with: 2)
+
     visit merchant_bulk_discounts_path(@merchant_1)
-    
+
     within("#upcoming_holidays-1") do
       expect(page).to have_button('Create Discount')
       click_button 'Create Discount'
-      expect(page).to have_current_path("/merchant/#{@merchant_1.id}/bulk_discounts/new?name=#{CGI.escape(upcoming_holidays[1])}")
     end
+
+    expect(page).to have_current_path("/merchant/#{@merchant_1.id}/bulk_discounts/new?name=#{CGI.escape(upcoming_holidays[1])}")
+    expect(page).to have_field(:bulk_discount_name, with: upcoming_holidays[1])
+    expect(page).to have_field(:bulk_discount_discount, with: 30)
+    expect(page).to have_field(:bulk_discount_quantity, with: 2)
 
     visit merchant_bulk_discounts_path(@merchant_1)
 
     within("#upcoming_holidays-2") do
       expect(page).to have_button('Create Discount')
       click_button 'Create Discount'
-      expect(page).to have_current_path("/merchant/#{@merchant_1.id}/bulk_discounts/new?name=#{CGI.escape(upcoming_holidays[2])}")
     end
+
+    expect(page).to have_current_path("/merchant/#{@merchant_1.id}/bulk_discounts/new?name=#{CGI.escape(upcoming_holidays[2])}")
+    expect(page).to have_field(:bulk_discount_name, with: upcoming_holidays[2])
+    expect(page).to have_field(:bulk_discount_discount, with: 30)
+    expect(page).to have_field(:bulk_discount_quantity, with: 2)
   end
 
   describe 'discount deletion' do
