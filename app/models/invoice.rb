@@ -14,4 +14,17 @@ class Invoice < ApplicationRecord
   def total_revenue
     invoice_items.sum("unit_price * quantity")
   end
+
+  def total_discounted_revenue
+    invoice_items.sum do |ii|
+      ii.discounted_revenue
+    end
+    # invoice_items
+    # .joins(:bulk_discounts)
+    # .where("bulk_discounts.quantity <= invoice_items.quantity")
+    # .group(:item_id)
+    # .minimum('invoice_items.quantity*invoice_items.unit_price*(100-bulk_discounts.discount)/100')
+    # .values
+    # .sum
+  end
 end
