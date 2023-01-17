@@ -13,7 +13,13 @@ class BulkDiscountsController < ApplicationController
   end
 
   def new
-    @bulk_discount = BulkDiscount.new
+    if(params[:name])
+      @bulk_discount = BulkDiscount.new(name: params[:name],
+                                        discount: 30,
+                                        quantity: 2)
+    else
+      @bulk_discount = BulkDiscount.new
+    end
   end
 
   def create

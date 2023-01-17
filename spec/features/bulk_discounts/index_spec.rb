@@ -49,6 +49,32 @@ RSpec.describe 'bulk discounts index' do
     expect(page).to have_content(upcoming_holidays[2])
   end
 
+  it 'has buttons to create discount for upcoming holidays' do
+    upcoming_holidays = ApiHelper.new.next_three_holidays
+
+    within("#upcoming_holidays-0") do
+      expect(page).to have_button('Create Discount')
+      click_button 'Create Discount'
+      expect(page).to have_current_path("/merchant/#{@merchant_1.id}/bulk_discounts/new?name=#{CGI.escape(upcoming_holidays[0])}")
+    end
+
+    visit merchant_bulk_discounts_path(@merchant_1)
+    
+    within("#upcoming_holidays-1") do
+      expect(page).to have_button('Create Discount')
+      click_button 'Create Discount'
+      expect(page).to have_current_path("/merchant/#{@merchant_1.id}/bulk_discounts/new?name=#{CGI.escape(upcoming_holidays[1])}")
+    end
+
+    visit merchant_bulk_discounts_path(@merchant_1)
+
+    within("#upcoming_holidays-2") do
+      expect(page).to have_button('Create Discount')
+      click_button 'Create Discount'
+      expect(page).to have_current_path("/merchant/#{@merchant_1.id}/bulk_discounts/new?name=#{CGI.escape(upcoming_holidays[2])}")
+    end
+  end
+
   describe 'discount deletion' do
     it 'has button which deletes each discount' do
       within("#bulk_discount-#{@bulk_discounts[0].id}") do
