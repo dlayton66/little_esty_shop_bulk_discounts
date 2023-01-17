@@ -19,3 +19,11 @@
     </section>
   <% end %>
 </ul>
+
+<h3>Upcoming Holidays</h3>
+
+<ul class='mr-auto col-sm-4'>
+  <% @api_helper.next_three_holidays.each do |holiday| %>
+    <li><%= holiday %></li>
+  <% end %>
+</ul>

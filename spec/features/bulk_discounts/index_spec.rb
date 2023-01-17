@@ -1,4 +1,5 @@
 require 'rails_helper'
+require './app/api_helper'
 
 RSpec.describe 'bulk discounts index' do
   before :each do
@@ -38,6 +39,14 @@ RSpec.describe 'bulk discounts index' do
 
   it 'has a link to create a new discount' do
     expect(page).to have_link('Create Bulk Discount', href: new_merchant_bulk_discount_path(@merchant_1))
+  end
+
+  it 'lists the 3 upcoming holidays' do
+    upcoming_holidays = ApiHelper.new.next_three_holidays
+    
+    expect(page).to have_content(upcoming_holidays[0])
+    expect(page).to have_content(upcoming_holidays[1])
+    expect(page).to have_content(upcoming_holidays[2])
   end
 
   describe 'discount deletion' do

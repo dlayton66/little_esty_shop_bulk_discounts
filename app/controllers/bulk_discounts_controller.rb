@@ -1,8 +1,11 @@
+require './app/api_helper'
+
 class BulkDiscountsController < ApplicationController
   before_action :find_merchant
 
   def index
     @bulk_discounts = @merchant.bulk_discounts
+    @api_helper = ApiHelper.new
   end
 
   def show
