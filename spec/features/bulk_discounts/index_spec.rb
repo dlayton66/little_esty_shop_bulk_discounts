@@ -51,7 +51,7 @@ RSpec.describe 'bulk discounts index' do
     expect(page).to have_content(upcoming_holidays[2])
   end
 
-  it 'has buttons to create discount for upcoming holidays' do
+  it 'has buttons to create discounts for upcoming holidays' do
     upcoming_holidays = ApiHelper.new.next_three_holidays
 
     within("#upcoming_holidays-0") do

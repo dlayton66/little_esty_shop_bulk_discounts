@@ -33,9 +33,6 @@ class BulkDiscountsController < ApplicationController
   def update
     if @bulk_discount.update(bulk_discount_params)
       redirect_to merchant_bulk_discount_path(@merchant, @bulk_discount)
-    else
-      redirect_to edit_merchant_bulk_discount_path(@merchant, @bulk_discount)
-      flash[:alert] = "Error: #{error_message(@bulk_discount.errors)}"
     end
   end
 
