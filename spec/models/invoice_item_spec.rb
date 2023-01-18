@@ -69,16 +69,6 @@ RSpec.describe InvoiceItem, type: :model do
       @bulk_discount_4 = BulkDiscount.create!(name: "Boxing Day", discount: 5, quantity: 5, merchant_id: @m1.id)
     end
 
-    describe '.discounted_revenue' do
-      it 'returns the discounted revenue for the invoice item' do
-        expect(@ii_1.discounted_revenue).to eq(47.5)
-        expect(@ii_2.discounted_revenue).to eq(68)
-        expect(@ii_3.discounted_revenue).to eq(63.75)
-        expect(@ii_4.discounted_revenue).to eq(70)
-        expect(@ii_5.discounted_revenue).to eq(5)
-      end
-    end
-
     describe '.top_discount' do
       it 'returns the best discount for the invoice item' do
         expect(@ii_1.top_discount).to eq(@bulk_discount_4)

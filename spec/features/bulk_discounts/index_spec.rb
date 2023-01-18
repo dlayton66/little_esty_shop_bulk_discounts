@@ -4,9 +4,9 @@ require './app/api_helper'
 RSpec.describe 'bulk discounts index' do
   before :each do
     @merchant_1 = Merchant.create!(name: 'Hair Care')
-    @merchant_2 = Merchant.create!(name: 'Jewelry')
-  
     @bulk_discounts = FactoryBot.create_list(:bulk_discount, 3, merchant: @merchant_1)
+    
+    @merchant_2 = Merchant.create!(name: 'Jewelry')
     @bulk_discount = FactoryBot.create(:bulk_discount, merchant: @merchant_2)
   
     visit merchant_bulk_discounts_path(@merchant_1)
@@ -16,11 +16,13 @@ RSpec.describe 'bulk discounts index' do
     expect(page).to have_link(@bulk_discounts[0].name, href: merchant_bulk_discount_path(@merchant_1, @bulk_discounts[0]))
     expect(page).to have_link(@bulk_discounts[1].name, href: merchant_bulk_discount_path(@merchant_1, @bulk_discounts[1]))
     expect(page).to have_link(@bulk_discounts[2].name, href: merchant_bulk_discount_path(@merchant_1, @bulk_discounts[2]))
+  end
   
+  it "doesn't have discounts from other merchants" do
     expect(page).to_not have_content(@bulk_discount.name)
   end
 
-  it 'lists discount info' do
+  it 'lists  discount info' do
     within("#bulk_discount-#{@bulk_discounts[0].id}") do
       expect(page).to have_content(@bulk_discounts[0].discount)
       expect(page).to have_content(@bulk_discounts[0].quantity)
@@ -41,7 +43,7 @@ RSpec.describe 'bulk discounts index' do
     expect(page).to have_link('Create Bulk Discount', href: new_merchant_bulk_discount_path(@merchant_1))
   end
 
-  it 'lists the 3 upcoming holidays' do
+  it 'lists 3 upcoming holidays' do
     upcoming_holidays = ApiHelper.new.next_three_holidays
     
     expect(page).to have_content(upcoming_holidays[0])

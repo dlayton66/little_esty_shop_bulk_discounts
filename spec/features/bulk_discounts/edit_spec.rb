@@ -14,7 +14,7 @@ RSpec.describe 'bulk discount edit page' do
     expect(page).to have_field(:bulk_discount_quantity, with: 5)
   end
 
-  it 'can fully the discount' do
+  it 'can fully edit the discount' do
     fill_in :bulk_discount_name, with: 'Easter'
     fill_in :bulk_discount_discount, with: 31
     fill_in :bulk_discount_quantity, with: 6

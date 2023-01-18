@@ -20,7 +20,7 @@ class Invoice < ApplicationRecord
     #   ii.discounted_revenue
     # end
 
-    return total_revenue if BulkDiscount.none?
+    return total_revenue if bulk_discounts.none?
 
     invoice_items
     .joins(:bulk_discounts)
