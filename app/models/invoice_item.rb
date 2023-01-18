@@ -16,6 +16,14 @@ class InvoiceItem < ApplicationRecord
     Invoice.order(created_at: :asc).find(invoice_ids)
   end
 
+  def discounted_revenue
+    if top_discount == []
+      quantity * unit_price
+    else
+      quantity * unit_price * (100 - top_discount.discount) / 100
+    end
+  end
+
   def top_discount
     bulk_discounts.quantity_threshold(quantity).top_discount
   end

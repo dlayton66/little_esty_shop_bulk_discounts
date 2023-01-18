@@ -78,5 +78,15 @@ RSpec.describe InvoiceItem, type: :model do
         expect(@ii_5.top_discount).to eq([])
       end
     end
+
+    describe '.discounted_revenue' do
+      it 'returns the discounted revenue for the invoice item' do
+        expect(@ii_1.discounted_revenue).to eq(47.5)
+        expect(@ii_2.discounted_revenue).to eq(68)
+        expect(@ii_3.discounted_revenue).to eq(63.75)
+        expect(@ii_4.discounted_revenue).to eq(70)
+        expect(@ii_5.discounted_revenue).to eq(5)
+      end
+    end
   end
 end
